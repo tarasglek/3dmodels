@@ -13,9 +13,8 @@ module inner() {
     cylinder(port_depth,audiojack_r, audiojack_r, center=false);
   }
   //power jack
-  //  rotate([-90,0,0])
-  //translate([0,0,height])
-  mirror([0,0,1])
+  translate([audiojack_x,-port_depth,height])
+  rotate([-90,180,0])
   dc_jack();
 }
 
@@ -27,23 +26,21 @@ module dc_jack() {
   rubber_back_depth = 10;
   terminal_depth = 7;
   terminal_width = 11;
-  
-  translate([0,0,terminal_depth]) {
-    translate([0,0,rubber_back_depth*2]) {
-      cylinder(rubber_r_depth, rubber_r, rubber_r);
-    };
- 
-    hull() {
-      translate([0,0,rubber_back_depth*2-rubber_r_depth])
-        cylinder(rubber_r_depth, rubber_r, rubber_r);
+  //female side
+  cylinder(rubber_r_depth, rubber_r, rubber_r);
 
-      translate([-rubber_back/2, -rubber_back/2,0])
-        cube([rubber_back, rubber_back, rubber_back_depth]);
-   }
+  hull() {
+  translate([0,0,rubber_r_depth])
+  cylinder(rubber_r_depth, rubber_r, rubber_r);
+
+  translate([-rubber_back/2, -rubber_back/2,rubber_r_depth*3])
+  cube([rubber_back, rubber_back, rubber_back_depth]);
   }
-  translate([-terminal_width/2, (rubber_back-terminal_width*2)/2,0])
+  //terminals
+  translate([-terminal_width/2, (rubber_back-terminal_width*2)/2,rubber_r_depth*3+rubber_back_depth])
     cube([terminal_width, terminal_width, terminal_depth]);
+
 }
 
-
+//dc_jack();
 inner();
