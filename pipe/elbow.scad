@@ -23,4 +23,4 @@ outgoing_inner_height = outgoing_hole_height - margin;
 translate([(incoming_outer_width-outgoing_inner_width)/2, 0, overlap_depth])
     rotate([90, 0, 0])
         rectangular_frame(outgoing_inner_width, outgoing_inner_height, wall_thickness, overlap_depth);
-// make a transition between edges of incoming and outgoing AI!
+// incoming outer edge and outgoing inner edge touch...hull them together to form an elbow AI!
