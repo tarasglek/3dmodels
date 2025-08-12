@@ -34,6 +34,6 @@ union() {
         // Margin-sized rect at outgoing opening (positioned to match the outgoing hole)
         translate([(incoming_outer_width-outgoing_inner_width)/2 + wall_thickness, -margin*2, overlap_depth + wall_thickness])
             rotate([90, 0, 0])
-                cube([outgoing_hole_width - margin, outgoing_hole_height - margin, margin]);
+                cube([outgoing_inner_width - 2*wall_thickness, outgoing_inner_height - 2*wall_thickness, margin]);
     }
 }
