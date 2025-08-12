@@ -14,11 +14,13 @@ overlap_depth=10;
 incoming_outer_width = margin + incoming_hole_width + 2 * wall_thickness;
 incoming_outer_height = margin + incoming_hole_height + 2 * wall_thickness;
 
-// Render the rectangle with a hole
+//incoming rect
 rectangular_frame(incoming_outer_width, incoming_outer_height, wall_thickness, overlap_depth);
 
 outgoing_inner_width = outgoing_hole_width - margin;
 outgoing_inner_height = outgoing_hole_height - margin;
-translate([0, incoming_outer_height/2, outgoing_inner_width/2])
+// outgoing rect
+translate([(incoming_outer_width-outgoing_inner_width)/2, 0, overlap_depth])
     rotate([90, 0, 0])
         rectangular_frame(outgoing_inner_width, outgoing_inner_height, wall_thickness, overlap_depth);
+// make a transition between edges of incoming and outgoing AI!
