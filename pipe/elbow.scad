@@ -20,7 +20,7 @@ rectangular_frame(incoming_outer_width, incoming_outer_height, wall_thickness, o
 outgoing_inner_width = outgoing_hole_width - margin;
 outgoing_inner_height = outgoing_hole_height - margin;
 // outgoing rect
-translate([(incoming_outer_width-outgoing_inner_width)/2, 0, overlap_depth])
+translate([(incoming_outer_width-outgoing_inner_width)/2, -margin*2, overlap_depth])
     rotate([90, 0, 0])
         rectangular_frame(outgoing_inner_width, outgoing_inner_height, wall_thickness, overlap_depth);
-// incoming outer edge and outgoing inner edge touch...hull them together to form an elbow AI!
+// incoming outer edge and outgoing inner edge touch...hull them together to form an elbow.do this by creating margin-sized rects attached to the 2 openings and hulling them..such that the existing rects grow from the hull...this will allow water to flow from incoming to outgoing AI!
