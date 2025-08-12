@@ -21,4 +21,4 @@ outgoing_inner_width = outgoing_hole_width - margin;
 outogoing_inner_height = outgoing_hole_height - margin;
 rotate([90, 0, 0])
     rectangular_frame(outgoing_inner_width, outogoing_inner_height, wall_thickness, overlap_depth);
-// center ^ rect agaist thefirst one AI! 
+// center ^ rect agaist thefirst one AI!
