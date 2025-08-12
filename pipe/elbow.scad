@@ -14,13 +14,26 @@ overlap_depth=10;
 incoming_outer_width = margin + incoming_hole_width + 2 * wall_thickness;
 incoming_outer_height = margin + incoming_hole_height + 2 * wall_thickness;
 
-//incoming rect
-rectangular_frame(incoming_outer_width, incoming_outer_height, wall_thickness, overlap_depth);
+union() {
+    //incoming rect
+    rectangular_frame(incoming_outer_width, incoming_outer_height, wall_thickness, overlap_depth);
 
-outgoing_inner_width = outgoing_hole_width - margin;
-outgoing_inner_height = outgoing_hole_height - margin;
-// outgoing rect
-translate([(incoming_outer_width-outgoing_inner_width)/2, -margin*2, overlap_depth])
-    rotate([90, 0, 0])
-        rectangular_frame(outgoing_inner_width, outgoing_inner_height, wall_thickness, overlap_depth);
-// incoming outer edge and outgoing inner edge touch...hull them together to form an elbow.do this by creating margin-sized rects attached to the 2 openings and hulling them..such that the existing rects grow from the hull...this will allow water to flow from incoming to outgoing AI!
+    outgoing_inner_width = outgoing_hole_width - margin;
+    outgoing_inner_height = outgoing_hole_height - margin;
+    // outgoing rect
+    translate([(incoming_outer_width-outgoing_inner_width)/2, -margin*2, overlap_depth])
+        rotate([90, 0, 0])
+            rectangular_frame(outgoing_inner_width, outgoing_inner_height, wall_thickness, overlap_depth);
+    
+    // Hull connecting the two openings for smooth water flow
+    hull() {
+        // Margin-sized rect at incoming opening
+        translate([margin, margin, overlap_depth - margin])
+            cube([incoming_hole_width, incoming_hole_height, margin]);
+        
+        // Margin-sized rect at outgoing opening  
+        translate([(incoming_outer_width-outgoing_inner_width)/2 + wall_thickness, -margin, overlap_depth + wall_thickness])
+            rotate([90, 0, 0])
+                cube([outgoing_hole_width - margin, outgoing_hole_height - margin, margin]);
+    }
+}
