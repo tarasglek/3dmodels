@@ -14,4 +14,5 @@ outer_height = margin + incoming_hole_height + 2 * frame_width;
 // Render the rectangle with a hole
 rectangular_frame(outer_width, outer_height, frame_width, 10); // Z-height = 5mm
 
-// Make another frame 90deg to ^ in preparation of forming a pipe elbow join AI!
+rotate([90, 0, 0])
+    rectangular_frame(outer_width, outer_height, frame_width, 10);
