@@ -26,16 +26,17 @@ union() {
             rectangular_frame(outgoing_inner_width, outgoing_inner_height, wall_thickness, overlap_depth);
     
     // Hull connecting the two openings for smooth water flow
-    hull() {
+    // hull() {
         translate([0, 0, overlap_depth])
-        rectangular_frame(incoming_outer_width, incoming_outer_height, wall_thickness/* *3 */, margin);// use cube function instead AI!
+        // rectangular_frame(incoming_outer_width, incoming_outer_height, wall_thickness/* *3 */, margin);
+        // cube equiv of ^ AI!
 
         // Margin-sized rect at outgoing opening (positioned to match the outgoing hole)
 
         // Margin-sized rect for outgoing
         translate([(incoming_outer_width-outgoing_inner_width)/2, -margin, overlap_depth])
         rotate([90, 0, 0])
-            rectangular_frame(outgoing_inner_width, outgoing_inner_height, wall_thickness/* *3 */, margin);// here use cube too AI1
+            rectangular_frame(outgoing_inner_width, outgoing_inner_height, wall_thickness/* *3 */, margin);
         
-    }
+    // }
 }
