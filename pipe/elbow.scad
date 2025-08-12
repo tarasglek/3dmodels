@@ -25,16 +25,26 @@ union() {
         rotate([90, 0, 0])
             rectangular_frame(outgoing_inner_width, outgoing_inner_height, wall_thickness, overlap_depth);
     
+    difference() {
     // Hull connecting the two openings for smooth water flow
     hull() {
-        translate([wall_thickness, wall_thickness, overlap_depth])
-            cube([incoming_hole_width, incoming_hole_height, margin]);
+        // margin-sized rect for incoming
+        translate([0, 0, overlap_depth])
+            cube([incoming_outer_width, incoming_outer_height, margin]);
 
-        // Margin-sized rect at outgoing opening (positioned to match the outgoing hole)
 
         // Margin-sized rect for outgoing
-        translate([(incoming_outer_width-outgoing_inner_width)/2 + wall_thickness, -margin, overlap_depth + wall_thickness])
+        translate([(incoming_outer_width-outgoing_inner_width)/2, -margin, overlap_depth ])
             rotate([90, 0, 0])
-                cube([outgoing_hole_width - margin, outgoing_hole_height - margin, margin]);
+                cube([outgoing_inner_width, outgoing_inner_height, margin]);
+    }
+    // hole
+    hull() {
+        translate([wall_thickness, wall_thickness/2+margin/2, overlap_depth])
+            cube([incoming_hole_width+margin*2, incoming_hole_height+margin*2, margin]);
+        translate([(incoming_outer_width-outgoing_inner_width)/2+wall_thickness, -margin, overlap_depth+wall_thickness ])
+            rotate([90, 0, 0])
+                cube([outgoing_inner_width-wall_thickness*2, outgoing_inner_height-wall_thickness*2, margin]);
+    }
     }
 }
