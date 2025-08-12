@@ -37,5 +37,3 @@ union() {
                 cube([outgoing_inner_width - 2*wall_thickness, outgoing_inner_height - 2*wall_thickness, margin]);
     }
 }
-
-// need to cut a negative hull to make water flow AI!
