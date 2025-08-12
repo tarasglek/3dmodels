@@ -18,7 +18,7 @@ incoming_outer_height = margin + incoming_hole_height + 2 * wall_thickness;
 rectangular_frame(incoming_outer_width, incoming_outer_height, wall_thickness, overlap_depth);
 
 outgoing_inner_width = outgoing_hole_width - margin;
-outogoing_inner_height = outgoing_hole_height - margin;
-rotate([90, 0, 0])
-    rectangular_frame(outgoing_inner_width, outogoing_inner_height, wall_thickness, overlap_depth);
-// center ^ rect agaist thefirst one AI!
+outgoing_inner_height = outgoing_hole_height - margin;
+translate([0, incoming_outer_height/2, outgoing_inner_width/2])
+    rotate([90, 0, 0])
+        rectangular_frame(outgoing_inner_width, outgoing_inner_height, wall_thickness, overlap_depth);
