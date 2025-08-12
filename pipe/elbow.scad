@@ -32,8 +32,10 @@ union() {
             cube([incoming_outer_width, incoming_outer_height, margin]);
         
         // Margin-sized rect at outgoing opening (positioned to match the outgoing hole)
-        translate([(incoming_outer_width-outgoing_inner_width)/2 + wall_thickness, -margin*2, overlap_depth + wall_thickness])
+        translate([(incoming_outer_width-outgoing_inner_width)/2 + wall_thickness, -margin*2, overlap_depth + wall_thickness*2])
             rotate([90, 0, 0])
                 cube([outgoing_inner_width - 2*wall_thickness, outgoing_inner_height - 2*wall_thickness, margin]);
     }
 }
+
+// need to cut a negative hull to make water flow AI!
