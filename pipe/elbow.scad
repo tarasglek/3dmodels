@@ -27,11 +27,11 @@ union() {
     
     // Hull connecting the two openings for smooth water flow
     hull() {
-        // Margin-sized rect at incoming opening
-        translate([margin, margin, overlap_depth - margin])
+        // Margin-sized rect at incoming opening (positioned at the back of the incoming frame)
+        translate([wall_thickness, wall_thickness, overlap_depth])
             cube([incoming_hole_width, incoming_hole_height, margin]);
         
-        // Margin-sized rect at outgoing opening  
+        // Margin-sized rect at outgoing opening (positioned at the front of the outgoing frame)
         translate([(incoming_outer_width-outgoing_inner_width)/2 + wall_thickness, -margin, overlap_depth + wall_thickness])
             rotate([90, 0, 0])
                 cube([outgoing_hole_width - margin, outgoing_hole_height - margin, margin]);
