@@ -3,7 +3,7 @@ outgoing_rect_full_width = 76-1;
 outgoing_rect_straight_width= 65;
 outgoing_rect_full_height = 66-1;
 outgoing_rect_straight_height = 55;
-corner_radius=(outgoing_rect_full_width-outgoing_rect_straight_width)/2;
+outgoing_corner_radius=(outgoing_rect_full_width-outgoing_rect_straight_width)/2;
 // Define the radius of the rounded corners
 
 
@@ -13,19 +13,20 @@ incoming_hole_width = 100;
 incoming_hole_height = 60;
 wall_thickness = 2;
 overlap_depth=10;
-
+/*
 // hole
 hull() {
         cube([incoming_hole_width+wall_thickness*2, incoming_hole_height+wall_thickness*2,1],anchor=CENTER) {
                 position([0,-1,1]) ymove(-overlap_depth) xrot(90)                 
                         cylinder(h=5,d=outgoing_rect_straight_width, anchor=[0,-1,-1]);
         };
-}
-
+}*/
+xrot(90)
+linear_extrude(20)
 minkowski() {
-    square([rect_width - 2*corner_radius, rect_height - 2*corner_radius], center=true);
-    circle(r=corner_radius);
-}
+    square([outgoing_rect_full_width - 2*outgoing_corner_radius, outgoing_rect_full_height - 2*outgoing_corner_radius], center=true);
+    circle(r=outgoing_corner_radius);
+}// factor this out into rounded_rect func AI!
 /*
 rect_tube(size=[outgoing_rect_full_width, outgoing_rect_full_height], wall=1, rounding=corner_radius, h=3) {
 position(TOP)  cube([outgoing_rect_full_width,outgoing_rect_full_width,outgoing_rect_full_width], anchor=BOTTOM);
