@@ -19,7 +19,7 @@ incoming_outer_height = margin + incoming_hole_height + 2 * wall_thickness;
 
 outgoing_inner_hole_width = outgoing_hole_width-wall_thickness*2;
 outgoing_inner_hole_height = outgoing_hole_height-wall_thickness*2;
-
+//
 union() {
     //incoming rect
     rectangular_frame(incoming_outer_width, incoming_outer_height, wall_thickness, overlap_depth);
@@ -35,6 +35,7 @@ union() {
             }
    difference() {
     // Hull connecting the two openings for smooth water flow
+    // move this hull into function ai!
         hull() {
             // margin-sized rect for incoming
             translate([0, 0, overlap_depth])
