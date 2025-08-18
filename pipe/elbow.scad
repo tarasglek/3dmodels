@@ -35,7 +35,6 @@ union() {
             }
    difference() {
     // Hull connecting the two openings for smooth water flow
-    // move this hull into function ai!
         hull() {
             // margin-sized rect for incoming
             translate([0, 0, overlap_depth])
@@ -48,6 +47,8 @@ union() {
                     cube([outgoing_hole_width, outgoing_hole_height, margin]);
         }
         // hole
+        // move this hull into function ai!
+
         hull() {
             translate([wall_thickness, wall_thickness/2+margin/2, overlap_depth])
                cube([incoming_hole_width+margin*2, incoming_hole_height+margin*2, margin]);
