@@ -53,7 +53,7 @@ union() {
             translate([incoming_outer_width/2,-margin,overlap_depth+outgoing_hole_height/2])
                 rotate([90, 0, 0])
                     // diameter is 1, we use scale to  set size...however radio for 1 is 0.5
-                    linear_extrude(height = margin)
+                    linear_extrude(height = margin)// use cylinder instead of extruding circle like above AI!
                         scale([outgoing_inner_hole_width, outgoing_inner_hole_height, 1]) circle(d=1, $fn=40);
         }
    }
