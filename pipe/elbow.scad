@@ -22,7 +22,7 @@ outgoing_inner_hole_height = outgoing_hole_height-wall_thickness*2;
 
 // opposite = outgoing_hole_height
 // adjacent=  incoming_outer_width
-degrees = //calc angle between o&a AI!
+degrees = atan(outgoing_hole_height / incoming_outer_width);
 
 rotate([0,0,0])
 union() {
