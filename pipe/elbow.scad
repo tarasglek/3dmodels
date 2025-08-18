@@ -19,7 +19,12 @@ incoming_outer_height = margin + incoming_hole_height + 2 * wall_thickness;
 
 outgoing_inner_hole_width = outgoing_hole_width-wall_thickness*2;
 outgoing_inner_hole_height = outgoing_hole_height-wall_thickness*2;
-//
+
+// opposite = outgoing_hole_height
+// adjacent=  incoming_outer_width
+degrees = //calc angle between o&a AI!
+
+rotate([0,0,0])
 union() {
     //incoming rect
     rectangular_frame(incoming_outer_width, incoming_outer_height, wall_thickness, overlap_depth);
@@ -47,8 +52,6 @@ union() {
                     cube([outgoing_hole_width, outgoing_hole_height, margin]);
         }
         // hole
-        // move this hull into function ai!
-
         hull() {
             translate([wall_thickness, wall_thickness/2+margin/2, overlap_depth])
                cube([incoming_hole_width+margin*2, incoming_hole_height+margin*2, margin]);
