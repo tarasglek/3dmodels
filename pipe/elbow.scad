@@ -22,9 +22,9 @@ outgoing_inner_hole_height = outgoing_hole_height-wall_thickness*2;
 
 // opposite = outgoing_hole_height
 // adjacent=  incoming_outer_width
-degrees = atan(outgoing_hole_height / incoming_outer_width);
+degrees = -137; // this is almost correct number to lay  h on back..but now sure what proper trig for it is AI!
 
-rotate([0, -degrees, 0])
+rotate([degrees, 0, 0])
 union() {
     //incoming rect
     rectangular_frame(incoming_outer_width, incoming_outer_height, wall_thickness, overlap_depth);
