@@ -17,10 +17,8 @@ overlap_depth=10;
 incoming_outer_width = margin + incoming_hole_width + 2 * wall_thickness;
 incoming_outer_height = margin + incoming_hole_height + 2 * wall_thickness;
 
-outgoing_inner_width = outgoing_hole_width;// inline outgoing_inner_width (no other changes) AI!
-outgoing_inner_height = outgoing_hole_height;// inline outgoing_inner_height (no other changes)  AI!
-outgoing_inner_hole_width = outgoing_inner_width-wall_thickness*2;
-outgoing_inner_hole_height = outgoing_inner_height-wall_thickness*2;
+outgoing_inner_hole_width = outgoing_hole_width-wall_thickness*2;
+outgoing_inner_hole_height = outgoing_hole_height-wall_thickness*2;
 
 union() {
     //incoming rect
@@ -43,15 +41,15 @@ union() {
 
 
             // Margin-sized rect for outgoing
-            translate([(incoming_outer_width-outgoing_inner_width)/2, -margin, overlap_depth ])
+            translate([(incoming_outer_width-outgoing_hole_width)/2, -margin, overlap_depth ])
                 rotate([90, 0, 0])
-                    cube([outgoing_inner_width, outgoing_inner_height, margin]);
+                    cube([outgoing_hole_width, outgoing_hole_height, margin]);
         }
         // hole
         hull() {
             translate([wall_thickness, wall_thickness/2+margin/2, overlap_depth])
                cube([incoming_hole_width+margin*2, incoming_hole_height+margin*2, margin]);
-            translate([incoming_outer_width/2,-margin,overlap_depth+outgoing_inner_height/2])
+            translate([incoming_outer_width/2,-margin,overlap_depth+outgoing_hole_height/2])
                 rotate([90, 0, 0])
                     // diameter is 1, we use scale to  set size...however radio for 1 is 0.5
                     linear_extrude(height = margin)
