@@ -30,7 +30,8 @@ union() {
         rotate([90, 0, 0])
             difference(){
                 rounded_rect(outgoing_hole_width, outgoing_hole_height, corner_radius, overlap_depth);
-                cylinder(h=overlap_depth,d=outgoing_inner_hole_height);
+                 scale([outgoing_inner_hole_width, outgoing_inner_hole_height, 1]) 
+                cylinder(h=overlap_depth,d=1, $fn=40);
             }
    difference() {
     // Hull connecting the two openings for smooth water flow
@@ -53,7 +54,7 @@ union() {
                 rotate([90, 0, 0])
                     // diameter is 1, we use scale to  set size...however radio for 1 is 0.5
                     linear_extrude(height = margin)
-                        scale([outgoing_inner_hole_width, outgoing_inner_hole_height, margin]) circle(d=1, $fn=40);
+                        scale([outgoing_inner_hole_width, outgoing_inner_hole_height, 1]) circle(d=1, $fn=40);
         }
    }
 }
