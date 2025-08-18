@@ -17,8 +17,8 @@ overlap_depth=10;
 incoming_outer_width = margin + incoming_hole_width + 2 * wall_thickness;
 incoming_outer_height = margin + incoming_hole_height + 2 * wall_thickness;
 
-outgoing_inner_width = outgoing_hole_width;// inline outgoing_inner_width AI!
-outgoing_inner_height = outgoing_hole_height;// inline outgoing_inner_height AI1
+outgoing_inner_width = outgoing_hole_width;// inline outgoing_inner_width (no other changes) AI!
+outgoing_inner_height = outgoing_hole_height;// inline outgoing_inner_height (no other changes)  AI!
 outgoing_inner_hole_width = outgoing_inner_width-wall_thickness*2;
 outgoing_inner_hole_height = outgoing_inner_height-wall_thickness*2;
 
