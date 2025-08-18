@@ -4,8 +4,11 @@ include <pipe.scad>;
 // Define the hole size
 incoming_hole_width = 100;
 incoming_hole_height = 60;
-outgoing_hole_width = 76;
-outgoing_hole_height = 66;
+outgoing_hole_width = 76-1;
+outgoing_hole_height = 66-1;
+outgoing_hole_straight_width= 65;
+outgoing_hole_straight_height = 55;
+corner_radius = (outgoing_hole_width - outgoing_hole_straight_width)/2;
 
 margin = 1;
 wall_thickness = 2; // Thickness of the rectangle around the hole
@@ -25,9 +28,12 @@ union() {
 
     
     // outgoing rect
-    translate([(incoming_outer_width-outgoing_inner_width)/2, -margin*2, overlap_depth])
+    translate([(incoming_outer_width)/2, -margin*2, overlap_depth + outgoing_hole_height/2 ])
         rotate([90, 0, 0])
-            rectangular_frame(outgoing_inner_width, outgoing_inner_height, wall_thickness, overlap_depth);
+            difference(){
+                rounded_rect(outgoing_hole_width, outgoing_hole_height, corner_radius, overlap_depth);
+                // ai, put a cylinder hole that's sized same as ^ AI!
+            }
    difference() {
     // Hull connecting the two openings for smooth water flow
         hull() {
