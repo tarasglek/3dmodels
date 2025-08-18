@@ -14,5 +14,13 @@ module rectangular_frame(outer_width, outer_height, frame_width, z_height) {
     }
 }
 
+module rounded_rect(width, height, corner_radius, extrude_height) {
+    linear_extrude(extrude_height)
+    minkowski() {
+        square([width - 2*corner_radius, height - 2*corner_radius], center=true);
+        circle(r=corner_radius);
+    }
+}
+    
 // Example usage
 //rectangular_frame(100, 60, 3, 10); // 100x60mm outer size, 3mm frame width, 5mm Z-height
