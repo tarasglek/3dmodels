@@ -19,12 +19,14 @@ outgoing_inner_height = outgoing_hole_height - margin;
 outgoing_inner_hole_width = outgoing_inner_width-wall_thickness*2;
 outgoing_inner_hole_height = outgoing_inner_height-wall_thickness*2;
 length = 100;
+diameter = outgoing_hole_width;
+
 union() {
     hull() 
     {
         cube([incoming_outer_width, incoming_outer_height, 1]);
         translate([incoming_outer_width/2, incoming_outer_height/2+overlap_depth, length])
-        sphere(d=outgoing_hole_height, $fn=40);
+        sphere(d=diameter, $fn=40);
 
     }
     
