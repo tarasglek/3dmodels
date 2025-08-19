@@ -32,8 +32,8 @@ union() {
     
     //  hull()
      {
-        translate([incoming_outer_width/2, incoming_outer_height/2+overlap_depth, length]) //factor this out into a func with no params AI!
-        rotate([0, 90, 90])
+        translate([incoming_outer_width/2, incoming_outer_height/2+overlap_depth, length]) 
+        //factor this translate/sphere   out into a func with no params AI!
         sphere(d=outgoing_hole_height, $fn=40);
         translate([0, 0,100 ])
         cube([outgoing_hole_width, outgoing_hole_height, 1]);
