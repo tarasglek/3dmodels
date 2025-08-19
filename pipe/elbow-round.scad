@@ -24,7 +24,8 @@ union() {
     {
         cube([incoming_outer_width, incoming_outer_height, 1]);
         translate([incoming_outer_width/2, incoming_outer_height/2+overlap_depth, length])
-            cylinder(d=outgoing_hole_height, h=1, $fn=40);
+        sphere(d=outgoing_hole_height, $fn=40);
+
     }
     
     // translate([0,0, 130])
