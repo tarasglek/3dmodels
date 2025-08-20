@@ -22,7 +22,7 @@ outgoing_inner_hole_height = outgoing_hole_height-wall_thickness*2;
 
 // opposite = outgoing_hole_height
 // adjacent=  incoming_outer_width
-degrees = -137; // this is almost correct number to lay  h on back..but now sure what proper trig for it is AI!
+degrees = -135.58; // this is almost correct number to lay  h on back..but now sure what proper trig for it is AI!
 
 rotate([degrees, 0, 0])
 union() {
