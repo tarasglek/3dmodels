@@ -18,28 +18,27 @@ outgoing_inner_width = outgoing_hole_width - margin;
 outgoing_inner_height = outgoing_hole_height - margin;
 outgoing_inner_hole_width = outgoing_inner_width-wall_thickness*2;
 outgoing_inner_hole_height = outgoing_inner_height-wall_thickness*2;
-length = 100;
 diameter = outgoing_hole_width;
+length = diameter;
 
 union() {
-    hull() 
+    hull()
     {
         cube([incoming_outer_width, incoming_outer_height, 1]);
-        translate([incoming_outer_width/2, incoming_outer_height/2+overlap_depth, length])
-        sphere(d=diameter, $fn=40);
-
-    }
+        translate([incoming_outer_width/2, incoming_outer_height/2+overlap_depth, diameter/2])
+            sphere(d=diameter, $fn=40);
     
+
     // translate([0,0, 130])
     // rotate([0, 90, 0])
-    
-    //  hull()
-     {
-        translate([incoming_outer_width/2, incoming_outer_height/2+overlap_depth, length]) 
-        //factor this translate/sphere   out into a func with no params AI!
-        sphere(d=outgoing_hole_height, $fn=40);
-        translate([0, 0,100 ])
-        cube([outgoing_hole_width, outgoing_hole_height, 1]);
+
+
+        translate([incoming_outer_width/2-outgoing_inner_width/2, diameter+overlap_depth,overlap_depth])
+        rotate([90, 0, 0])
+            cube([outgoing_inner_width, outgoing_inner_height, 1]);
+        translate([incoming_outer_width/2, incoming_outer_height/2+overlap_depth, diameter/2])
+            sphere(d=diameter, $fn=40);
+
     }
 }
 
