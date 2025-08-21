@@ -39,7 +39,14 @@ union() {
                  scale([outgoing_inner_hole_width, outgoing_inner_hole_height, 1]) 
                 cylinder(h=overlap_depth,d=1, $fn=40);
             }
+            difference() {
+                translate([incoming_outer_width/2, incoming_outer_height, overlap_depth])
+                    scale([incoming_outer_width, incoming_outer_height/4, wall_thickness])
+                        cylinder(d=1,h=wall_thickness/2, $fn=100);
+                translate([0, incoming_outer_height-incoming_outer_height/4, overlap_depth])
 
+                cube([incoming_outer_width, incoming_outer_height/4,wall_thickness]);
+            }
    difference() {
     // Hull connecting the two openings for smooth water flow
         hull() {
