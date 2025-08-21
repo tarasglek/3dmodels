@@ -44,12 +44,8 @@ union() {
     // Hull connecting the two openings for smooth water flow
         hull() {
                 translate([incoming_outer_width/2, incoming_outer_height, overlap_depth])
-                difference() {
                     scale([incoming_outer_width, incoming_outer_height/4, 1])
                         cylinder(d=1,h=1, $fn=100);
-                    translate([0, -incoming_outer_height/8/2, 0])
-                        cube([incoming_outer_width, incoming_outer_height/8, 4], center=true);
-                }
             // margin-sized rect for incoming
             translate([0, 0, overlap_depth])
                 cube([incoming_outer_width, incoming_outer_height, margin]);
@@ -67,6 +63,9 @@ union() {
         }
         // hole
         hull() {
+            translate([incoming_outer_width/2, incoming_outer_height-wall_thickness, overlap_depth])
+                    scale([incoming_outer_width-wall_thickness, incoming_outer_height/4-wall_thickness, 1])
+                        cylinder(d=1,h=1, $fn=100);
             translate([wall_thickness, wall_thickness/2+margin/2, overlap_depth])
                cube([incoming_hole_width+margin*2, incoming_hole_height+margin*2, margin]);
             translate([incoming_outer_width/2,-margin,overlap_depth+outgoing_hole_height/2])
