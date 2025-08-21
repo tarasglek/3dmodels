@@ -22,7 +22,8 @@ outgoing_inner_hole_height = outgoing_hole_height-wall_thickness*2;
 
 // opposite = outgoing_hole_height
 // adjacent=  incoming_outer_width
-degrees = -135.58; // this is almost correct number to lay  h on back..but now sure what proper trig for it is AI!
+// degrees = -135.58; // this is almost correct number to lay  h on back..but now sure what proper trig for it is AI!
+degrees = 90;
 
 rotate([degrees, 0, 0])
 union() {
@@ -38,9 +39,17 @@ union() {
                  scale([outgoing_inner_hole_width, outgoing_inner_hole_height, 1]) 
                 cylinder(h=overlap_depth,d=1, $fn=40);
             }
+
    difference() {
     // Hull connecting the two openings for smooth water flow
         hull() {
+                translate([incoming_outer_width/2, incoming_outer_height, overlap_depth])
+                difference() {
+                    scale([incoming_outer_width, incoming_outer_height/4, 1])
+                        cylinder(d=1,h=1, $fn=100);
+                    translate([0, -incoming_outer_height/8/2, 0])
+                        cube([incoming_outer_width, incoming_outer_height/8, 4], center=true);
+                }
             // margin-sized rect for incoming
             translate([0, 0, overlap_depth])
                 cube([incoming_outer_width, incoming_outer_height, margin]);
@@ -50,6 +59,11 @@ union() {
             translate([(incoming_outer_width-outgoing_hole_width)/2, -margin, overlap_depth ])
                 rotate([90, 0, 0])
                     cube([outgoing_hole_width, outgoing_hole_height, margin]);
+                    color("red")
+        translate([(incoming_outer_width)/2, -margin, overlap_depth+ outgoing_hole_height])
+        rotate([90, 0, 0])
+        scale([outgoing_hole_width+wall_thickness*2, outgoing_hole_height/4, 1])
+        cylinder(d=1,h=1, $fn=100);
         }
         // hole
         hull() {
