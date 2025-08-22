@@ -1,5 +1,7 @@
 // Include the rectangular_frame module
 include <pipe.scad>;
+// TODO: adjust size of incoming
+// fix strength of top and bottom of incoming hole
 
 // Define the hole size
 incoming_hole_width = 100;
@@ -46,7 +48,7 @@ union() {
                 translate([0, incoming_outer_height-incoming_outer_height/4, overlap_depth])
 
                 cube([incoming_outer_width, incoming_outer_height/4,wall_thickness]);
-            }
+            }// factor out ^ block into a function with params [x, y, z] AI!
    difference() {
     // Hull connecting the two openings for smooth water flow
         hull() {
