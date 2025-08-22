@@ -24,7 +24,6 @@ outgoing_inner_hole_height = outgoing_hole_height-wall_thickness*2;
 
 // opposite = outgoing_hole_height
 // adjacent=  incoming_outer_width
-// degrees = -135.58; // this is almost correct number to lay  h on back..but now sure what proper trig for it is AI!
 degrees = 90;
 
 rotate([degrees, 0, 0])
@@ -48,7 +47,7 @@ union() {
                 translate([0, incoming_outer_height-incoming_outer_height/4, overlap_depth])
 
                 cube([incoming_outer_width, incoming_outer_height/4,wall_thickness]);
-            }// factor out ^ block into a function with params [x, y, z] AI!
+            }// factor out ^ block into a function top_half_ellipse with params [x, y, z]..this particular usage should be invoked with  [0,0,overlap_depth]  for xyz..eg hardcode size of ellipse/rect and keep code adjusting for host ellipse and cube are positioned relatively AI!
    difference() {
     // Hull connecting the two openings for smooth water flow
         hull() {
