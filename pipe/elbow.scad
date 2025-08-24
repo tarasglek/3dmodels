@@ -70,12 +70,18 @@ union() {
         cylinder(d=1,h=1, $fn=100);
         }
         // hole
-        hull() {
+    hull() {
+        difference(){
             translate([incoming_outer_width/2, incoming_outer_height-wall_thickness, overlap_depth])
+                rotate([90,0,0])
                     scale([incoming_outer_width-wall_thickness, incoming_outer_height/4-wall_thickness, 1])
                         cylinder(d=1,h=1, $fn=100);
+            // subtract rect to halve the cylinder
+               translate([0, incoming_outer_height-wall_thickness*2, overlap_depth-incoming_outer_height/8])
+                cube([incoming_outer_width, wall_thickness, incoming_outer_height/8]);
+        }
             translate([wall_thickness, wall_thickness/2+margin/2, overlap_depth])
-               cube([incoming_hole_width+margin*2, incoming_hole_height+margin*2, margin]);
+               cube([incoming_hole_width+margin*2, incoming_hole_height+margin, margin]);
             translate([incoming_outer_width/2,-margin,overlap_depth+outgoing_hole_height/2])
                 rotate([90, 0, 0])
                     // diameter is 1, we use scale to  set size...however radio for 1 is 0.5
@@ -84,23 +90,5 @@ union() {
         }
    }
    
-    hull() {
-        difference(){
-            translate([incoming_outer_width/2, incoming_outer_height-wall_thickness, overlap_depth])
-                rotate([90,0,0])
-                    scale([incoming_outer_width-wall_thickness, incoming_outer_height/4-wall_thickness, 1])
-                        cylinder(d=1,h=1, $fn=100);
-            // subtract rect to halve the cylinder
-            translate([0, incoming_outer_height-wall_thickness, overlap_depth-incoming_outer_height/8])
-                cube([incoming_outer_width, wall_thickness, incoming_outer_height/8]);
-        }
-            translate([wall_thickness, wall_thickness/2+margin/2, overlap_depth])
-               cube([incoming_hole_width+margin*2, incoming_hole_height+margin*2, margin]);
-            translate([incoming_outer_width/2,-margin,overlap_depth+outgoing_hole_height/2])
-                rotate([90, 0, 0])
-                    // diameter is 1, we use scale to  set size...however radio for 1 is 0.5
-                    scale([outgoing_inner_hole_width, outgoing_inner_hole_height, 1])
-                        cylinder(h=margin, d=1, $fn=40);
-        }
 }
 
