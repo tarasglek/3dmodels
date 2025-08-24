@@ -34,7 +34,9 @@ rotate([degrees, 0, 0])
 
     //incoming rect
     rectangular_frame(incoming_outer_width, incoming_outer_height, wall_thickness, overlap_depth);
-
+    //cube under frame
+    translate([0, -wall_thickness, 0])
+      cube([incoming_outer_width, wall_thickness, overlap_depth+wall_thickness]);
 
     // outgoing rect
     translate([(incoming_outer_width) / 2, -margin * 2, overlap_depth + outgoing_hole_height / 2])
