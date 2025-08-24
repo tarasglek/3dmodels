@@ -5,10 +5,10 @@ include <pipe.scad>
 // fix strength of top and bottom of incoming hole
 
 // Define the hole size
-incoming_hole_width = 100;
-incoming_hole_height = 60;
-outgoing_hole_width = 76 - 1;
-outgoing_hole_height = 66 - 1;
+incoming_hole_width = 102;
+incoming_hole_height = 66;
+outgoing_hole_width = 76;
+outgoing_hole_height = 66;
 outgoing_hole_straight_width = 65;
 outgoing_hole_straight_height = 55;
 corner_radius = (outgoing_hole_width - outgoing_hole_straight_width) / 2;
