@@ -88,10 +88,11 @@ union() {
         difference(){
             translate([incoming_outer_width/2, incoming_outer_height-wall_thickness, overlap_depth])
                 rotate([90,0,0])
-
                     scale([incoming_outer_width-wall_thickness, incoming_outer_height/4-wall_thickness, 1])
                         cylinder(d=1,h=1, $fn=100);
-                        // subtract rect to halve the cylinder like in first hull ^ AI!
+            // subtract rect to halve the cylinder
+            translate([0, incoming_outer_height-wall_thickness, overlap_depth-incoming_outer_height/8])
+                cube([incoming_outer_width, wall_thickness, incoming_outer_height/8]);
         }
             translate([wall_thickness, wall_thickness/2+margin/2, overlap_depth])
                cube([incoming_hole_width+margin*2, incoming_hole_height+margin*2, margin]);
