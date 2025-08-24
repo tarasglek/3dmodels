@@ -26,15 +26,7 @@ outgoing_inner_hole_height = outgoing_hole_height-wall_thickness*2;
 // adjacent=  incoming_outer_width
 degrees = 90;
 
-module top_half_ellipse(x, y, z) {
-    difference() {
-        translate([incoming_outer_width/2 + x, incoming_outer_height + y, z])
-            scale([incoming_outer_width, incoming_outer_height/4, wall_thickness])
-                cylinder(d=1, h=wall_thickness/2, $fn=100);
-        translate([0 + x, incoming_outer_height - incoming_outer_height/4 + y, z])
-            cube([incoming_outer_width, incoming_outer_height/4, wall_thickness]);
-    }
-}
+
 
 rotate([degrees, 0, 0])
 union() {
@@ -50,13 +42,17 @@ union() {
                  scale([outgoing_inner_hole_width, outgoing_inner_hole_height, 1]) 
                 cylinder(h=overlap_depth,d=1, $fn=40);
             }
-            top_half_ellipse(0, 0, overlap_depth);
    difference() {
     // Hull connecting the two openings for smooth water flow
-        hull() {
+                 hull() {
+            difference() {
                 translate([incoming_outer_width/2, incoming_outer_height, overlap_depth])
+                rotate([90,0,0])
                     scale([incoming_outer_width, incoming_outer_height/4, 1])
                         cylinder(d=1,h=1, $fn=100);
+                               translate([0, incoming_outer_height-wall_thickness, overlap_depth-incoming_outer_height/8])
+                   cube([incoming_outer_width, wall_thickness, incoming_outer_height/8]);
+            }
             // margin-sized rect for incoming
             translate([0, 0, overlap_depth])
                 cube([incoming_outer_width, incoming_outer_height, margin]);
