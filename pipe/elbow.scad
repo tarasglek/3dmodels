@@ -15,7 +15,8 @@ corner_radius = (outgoing_hole_width - outgoing_hole_straight_width) / 2;
 
 margin = 1;
 wall_thickness = 2; // Thickness of the rectangle around the hole
-overlap_depth = 10;
+overlap_depth = 15;
+outgoing_overlap_depth = overlap_depth * 1.1;
 // Calculate outer dimensions
 incoming_outer_width = margin + incoming_hole_width + 2 * wall_thickness;
 incoming_outer_height = margin + incoming_hole_height + 2 * wall_thickness;
@@ -42,9 +43,9 @@ rotate([degrees, 0, 0])
     translate([(incoming_outer_width) / 2, -margin * 2, overlap_depth + outgoing_hole_height / 2])
       rotate([90, 0, 0])
         difference() {
-          rounded_rect(outgoing_hole_width, outgoing_hole_height, corner_radius, overlap_depth);
+          rounded_rect(outgoing_hole_width, outgoing_hole_height, corner_radius, outgoing_overlap_depth);
           scale([outgoing_inner_hole_width, outgoing_inner_hole_height, 1])
-            cylinder(h = overlap_depth, d = 1, $fn = 40);
+            cylinder(h = outgoing_overlap_depth, d = 1, $fn = 40);
         }
     difference() {
       // Hull connecting the two openings for smooth water flow
