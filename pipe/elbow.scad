@@ -25,7 +25,7 @@ outgoing_inner_hole_height = outgoing_hole_height - wall_thickness * 2;
 
 // opposite = outgoing_hole_height
 // adjacent=  incoming_outer_width
-degrees = 90;
+degrees = 0;
 
 
 
