@@ -5,8 +5,8 @@ include <pipe.scad>
 // fix strength of top and bottom of incoming hole
 
 // Define the hole size
-incoming_hole_width = 102;
-incoming_hole_height = 66;
+incoming_hole_width = 101;
+incoming_hole_height = 63;
 outgoing_hole_width = 76;
 outgoing_hole_height = 66;
 outgoing_hole_straight_width = 65;
