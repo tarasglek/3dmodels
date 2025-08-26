@@ -1,6 +1,6 @@
 // Include the rectangular_frame module
 include <pipe.scad>
-;
+include <BOSL2/std.scad>;
 // TODO: adjust size of incoming
 // fix strength of top and bottom of incoming hole
 
@@ -95,4 +95,18 @@ rotate([degrees, 0, 0])
     }
 
   }
+nozzle_size=0.4;
+support_od=outgoing_overlap_depth/1.1;
+support_left = incoming_hole_width/2-outgoing_hole_straight_width/2+support_od/2 + (outgoing_hole_straight_width-support_od*4)/4;
+translate([support_left,-outgoing_overlap_depth+support_od/2-margin*2,overlap_depth/2])
+  tube(od=support_od,wall=nozzle_size,h=overlap_depth);
 
+translate([support_left+outgoing_overlap_depth,-outgoing_overlap_depth+support_od/2-margin*2,overlap_depth/2])
+  tube(od=support_od,wall=nozzle_size,h=overlap_depth);
+
+translate([support_left+outgoing_overlap_depth*2,-outgoing_overlap_depth+support_od/2-margin*2,overlap_depth/2])
+  tube(od=support_od,wall=nozzle_size,h=overlap_depth);
+
+translate([support_left+outgoing_overlap_depth*3,-outgoing_overlap_depth+support_od/2-margin*2,overlap_depth/2])
+  tube(od=support_od,wall=nozzle_size,h=overlap_depth);
+// ^ put above into a loop to simplify AI!
