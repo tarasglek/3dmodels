@@ -15,8 +15,8 @@ corner_radius = (outgoing_hole_width - outgoing_hole_straight_width) / 2;
 
 margin = 1;
 wall_thickness = 2; // Thickness of the rectangle around the hole
-overlap_depth = 15;
-outgoing_overlap_depth = overlap_depth * 1.1;
+overlap_depth = 50;
+outgoing_overlap_depth = 20;
 // Calculate outer dimensions
 incoming_outer_width = margin + incoming_hole_width + 2 * wall_thickness;
 incoming_outer_height = margin + incoming_hole_height + 2 * wall_thickness;
