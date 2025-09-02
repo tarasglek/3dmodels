@@ -18,7 +18,7 @@ module rounded_rect(width, height, corner_radius, extrude_height) {
     linear_extrude(extrude_height)
     minkowski() {
         square([width - 2*corner_radius, height - 2*corner_radius], center=true);
-        circle(r=corner_radius);
+        circle(r=corner_radius,$fn=20);
     }
 }
     

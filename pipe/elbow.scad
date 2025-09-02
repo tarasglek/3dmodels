@@ -4,19 +4,22 @@ include <BOSL2/std.scad>;
 // TODO: adjust size of incoming
 // fix strength of top and bottom of incoming hole
 
-// Define the hole size
-incoming_hole_width = 101;
-incoming_hole_height = 63;
-outgoing_hole_width = 76;
-outgoing_hole_height = 66;
-outgoing_hole_straight_width = 65;
-outgoing_hole_straight_height = 55;
-corner_radius = (outgoing_hole_width - outgoing_hole_straight_width) / 2;
-
 margin = 1;
 wall_thickness = 2; // Thickness of the rectangle around the hole
 overlap_depth = 50;
 outgoing_overlap_depth = 20;
+
+// Define the hole size
+incoming_hole_width = 101;
+incoming_hole_height = 63;
+incoming_corner_radius = wall_thickness;
+outgoing_hole_width = 76;
+outgoing_hole_height = 66;
+outgoing_hole_straight_width = 65;
+outgoing_hole_straight_height = 55;
+outgoing_corner_radius = (outgoing_hole_width - outgoing_hole_straight_width) / 2;
+
+
 // Calculate outer dimensions
 incoming_outer_width = margin + incoming_hole_width + 2 * wall_thickness;
 incoming_outer_height = margin + incoming_hole_height + 2 * wall_thickness;
@@ -34,16 +37,23 @@ rotate([degrees, 0, 0])
   union() {
 
     //incoming rect
-    rectangular_frame(incoming_outer_width, incoming_outer_height, wall_thickness, overlap_depth);
+    // rectangular_frame(incoming_outer_width, incoming_outer_height, wall_thickness, overlap_depth);
+    difference(){
+      translate([incoming_outer_width/2,incoming_outer_height/2,0])
+        rounded_rect(incoming_outer_width, incoming_outer_height, incoming_corner_radius,overlap_depth );
+      translate([incoming_outer_width/2,incoming_outer_height/2,0])
+        rounded_rect(incoming_outer_width-wall_thickness*2, incoming_outer_height-wall_thickness*2, incoming_corner_radius,overlap_depth );
+        
+    }
     //cube under frame
     translate([0, -wall_thickness, 0])
-      cube([incoming_outer_width, wall_thickness, overlap_depth+wall_thickness]);
+      cube([incoming_outer_width-wall_thickness, wall_thickness, overlap_depth+wall_thickness]);
 
     // outgoing rect
     translate([(incoming_outer_width) / 2, -margin * 2, overlap_depth + outgoing_hole_height / 2])
       rotate([90, 0, 0])
         difference() {
-          rounded_rect(outgoing_hole_width, outgoing_hole_height, corner_radius, outgoing_overlap_depth);
+          rounded_rect(outgoing_hole_width, outgoing_hole_height, outgoing_corner_radius, outgoing_overlap_depth);
           scale([outgoing_inner_hole_width, outgoing_inner_hole_height, 1])
             cylinder(h = outgoing_overlap_depth, d = 1, $fn = 40);
         }

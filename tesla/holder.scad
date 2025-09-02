@@ -4,7 +4,7 @@ depth=62;
 
 steering_width=120;
 steering_depth=25;
-rotate([0,180,0])
+//rotate([0,180,0])
 difference()
 {
     union(){
@@ -12,7 +12,7 @@ difference()
             import("teslashim.stl");
 
 
-        translate([-width/2+steering_width/2+30,-55-thickness,-35-depth+steering_depth])
+        translate([-width/2+steering_width/2+30,-55-thickness,-depth+steering_depth+1])
         cube([width, thickness, depth]);
     }
     union()
@@ -25,7 +25,7 @@ difference()
         translate([30-10,-58,-30])
         rotate([0,90,0])
             cylinder(h=steering_width+20,d=8);
-}
+    }
 }
 
 /*
