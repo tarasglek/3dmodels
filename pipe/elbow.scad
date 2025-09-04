@@ -46,8 +46,8 @@ rotate([degrees, 0, 0])
         
     }
     //cube under frame
-    translate([0, -wall_thickness, 0])
-      cube([incoming_outer_width-wall_thickness, wall_thickness, overlap_depth+wall_thickness]);
+    translate([wall_thickness, -wall_thickness, 0])
+      cube([incoming_outer_width-wall_thickness*2, wall_thickness, overlap_depth+wall_thickness]);
 
     // outgoing rect
     translate([(incoming_outer_width) / 2, -margin * 2, overlap_depth + outgoing_hole_height / 2])
@@ -106,7 +106,7 @@ rotate([degrees, 0, 0])
 
   }
 nozzle_size=0.4;
-gap = nozzle_size/2;
+gap = 0;//nozzle_size/2;
 support_od=outgoing_overlap_depth/1.1;
 support_left = incoming_hole_width/2-outgoing_hole_straight_width/2+support_od/2 + (outgoing_hole_straight_width-support_od*4)/4;
 for (i = [0:3]) {
