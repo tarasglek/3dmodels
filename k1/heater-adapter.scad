@@ -121,19 +121,32 @@ module rounded_rect(width, height, corner_radius, extrude_height) {
     }
 }
 
+wall_size=2;
+past_screw=screw_center_distance_from_edge+screw_hole_radius_wider;
+side_size_diff=(fan_size-heater_size-wall_size*4)/2;
+size_diff =fan_size - heater_size;
+fan_offset = size_diff/2-wall_size;
+hole_height=heater_size + wall_size*2;
+hole_width=fan_size-(past_screw+wall_size)*2;
 difference(){
     PrimeShapeWithScrewHoles();
-    translate([(fan_size)/2,(fan_size)/2,0])
+    translate([(fan_size)/2-fan_offset,(fan_size)/2,0])
     rounded_rect(heater_size, heater_size, (heater_size-heater_straight)/2,grill_thickness );
     // translate([(fan_size-heater_size)/2,(fan_size-heater_size)/2,0])
     
     // cube([heater_size, heater_size, grill_thickness+1]);
 
-    translate([(fan_size-heater_size)/2+tab_offset,(fan_size-heater_size)/2+heater_size,0])
+    translate([(fan_size-heater_size)/2+tab_offset-fan_offset,(fan_size-heater_size)/2+heater_size,0])
     cube([tab_width,tab_height,tab_offset]);
-    translate([(fan_size-heater_size)/2+heater_size-tab_width-tab_offset,0,0])
+    translate([(fan_size-heater_size)/2+heater_size-tab_width-tab_offset-fan_offset,0,0])
     cube([tab_width,tab_height,tab_offset]);
+    translate([hole_height,screw_center_distance_from_edge+screw_hole_radius_wider+wall_size,0])
+    cube([fan_size-hole_height, hole_width ,grill_thickness]);
+    translate([past_screw,wall_size,0])
+    cube([fan_size-wall_size-past_screw*2, side_size_diff, grill_thickness]);
 
+    translate([past_screw,fan_size-side_size_diff-wall_size,0])
+    cube([fan_size-wall_size-past_screw*2, side_size_diff, grill_thickness]);
 }
 
 
