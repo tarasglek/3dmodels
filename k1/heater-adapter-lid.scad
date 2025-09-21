@@ -1,9 +1,20 @@
+
 /* [Size and thickness] */
 // fan size in mm
 fan_size = 80; // [40:20:200]
 
+tab_width_outer=88.1;
+tab_height=13.5;
+tab_width=12.5;
+tab_offset=5.5;
+heater_size=61.5;
+heater_straight=52;
+heater_depth=4.5;
+space_after_depth=3;
+fan_depth=space_after_depth;
+
 // fan grill thickness in mm
-grill_thickness = 2;
+grill_thickness = fan_depth;
 
 // plastic thickness around the fan hole in mm
 vent_wall_thickness = 1;
@@ -101,20 +112,25 @@ module ScrewHole(x, y) {
     }
 }
 
-difference() {
-    PrimeShapeWithScrewHoles();
 
-    // fan duct
-    translate([fan_size / 2, fan_size / 2, grill_thickness / 2])
-    cylinder(r=fan_size / 2 - vent_wall_thickness, grill_thickness + 2, center=true);
-
-    if (fan_duct_chamfer)
-        translate([fan_size / 2, fan_size / 2, grill_thickness])
-        cylinder(r1=fan_size / 2 - vent_wall_thickness, r2=fan_size / 2, h=0.4, center=true);
+module rounded_rect(width, height, corner_radius, extrude_height) {
+    linear_extrude(extrude_height)
+    minkowski() {
+        square([width - 2*corner_radius, height - 2*corner_radius], center=true);
+        circle(r=corner_radius,$fn=20);
+    }
 }
 
-intersection() {
+difference(){
     PrimeShapeWithScrewHoles();
-
+    translate([(fan_size)/2,(fan_size)/2,0])
+    rounded_rect(heater_size, heater_size, (heater_size-heater_straight)/2,grill_thickness );
     
+    translate([(fan_size-heater_size)/2+tab_offset+tab_width,(fan_size-heater_size)/2+heater_size,0])
+    cube([tab_width*2.2,tab_height,grill_thickness]);
+    // translate([(fan_size-heater_size)/2+heater_size-tab_width-tab_offset,0,0])
+    // cube([tab_width,tab_height,tab_offset]);
+
 }
+
+
