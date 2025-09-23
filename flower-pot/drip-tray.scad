@@ -13,3 +13,4 @@ translate([w,drip_height,l])
 rotate([0,90,180])
 linear_extrude(w)
  right_triangle([drip_height,drip_height]);
+echo(inside_w);
