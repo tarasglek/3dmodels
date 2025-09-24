@@ -1,48 +1,38 @@
-include <dimensions.scad>;      
-include <BOSL2/std.scad>;
+include <BOSL2/std.scad>
+include <dimensions.scad>
 
-depth=pot_height;
-module shape(size) {
-    cut_off=size/10;
+wall_size=1.2;
+rounding=10;
 
-        // difference()
-        {
-    hull()
-     {
+nozzle_size=0.4;
+support_od=5;
+
+difference()
+{
+
+    cuboid([inside_l,inside_w,pot_height], rounding=rounding, except=[TOP])
+    {
+        align(BOTTOM,RIGHT+FRONT, inset=rounding) cyl(l=wall_size, r=pot_height/10);
+        align(BOTTOM,RIGHT+BACK, inset=rounding) cyl(l=wall_size, r=pot_height/10);
+        align(BOTTOM,LEFT+FRONT, inset=rounding) cyl(l=wall_size, r=pot_height/10);
+        align(BOTTOM,LEFT+BACK, inset=rounding) cyl(l=wall_size, r=pot_height/10);
         
-        translate([0,0,size/4])
+    };
+    translate([0,0, wall_size])
+    cuboid([inside_l-wall_size*2,inside_w-wall_size*2,pot_height], rounding=20, except=[TOP]);
+    cyl(l=pot_height*2, r=pot_height/10);
+}
 
-        // half-sphere
-        difference()
-        {
-            sphere(d=size,$fn=30);
-            translate([0,0,-size/4])
-                cube([size,size,size/2],center=true);
+rounding_offset=rounding+3;
+support_l=(inside_l-rounding_offset*2);
+support_y=(inside_w-rounding_offset*2);
+count_x=support_l/support_od;
+gap=(support_l - (count_x*support_od))/count_x;
 
-        };
-            
-        
-        cube([size,size,depth],center=true);
+x=-support_l/2;
+y=-support_y/2;
+    for (xi = [0:(count_x+1)]) {
+           translate([x+(support_od+gap)*xi,y,-pot_height/2])
+            tube(od=support_od, wall=nozzle_size, h=wall_size);
     }
 
-            translate([0,0,size/2+cut_off*2])
-                cube([size/8,size/8,cut_off], center=true);
-        }
-
-}
-
-module section(size) {
-
-    wall_size=1.2;
-    difference(){
-        shape(size);
-        shape(size-wall_size*2);
-    }
-
-
-}
-
-for (i = [0]) {
-    translate([i*inside_w,0,0])
-    section(inside_w);
-}
