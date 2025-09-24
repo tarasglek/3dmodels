@@ -31,8 +31,10 @@ gap=(support_l - (count_x*support_od))/count_x;
 
 x=-support_l/2;
 y=-support_y/2;
+for (yi = [0:(support_y/support_od)]) {
     for (xi = [0:(count_x+1)]) {
-           translate([x+(support_od+gap)*xi,y,-pot_height/2])
+        translate([x+(support_od+gap)*xi,y+(support_od*yi),-pot_height/2])
             tube(od=support_od, wall=nozzle_size, h=wall_size);
     }
+}
 
