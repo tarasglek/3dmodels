@@ -42,7 +42,7 @@ union() {
                 
             
         translate([0,0, wall_size*2])
-        cuboid([inside_l-wall_size*2,inside_w-wall_size*2,pot_height], rounding=rounding*2, except=[TOP,BOTTOM]);
+        cuboid([inside_l-wall_size*2,inside_w-wall_size*2,pot_height], rounding=rounding*2, except=[TOP]);
         // cyl(l=pot_height*2, r=pot_height/20);
     }
 
